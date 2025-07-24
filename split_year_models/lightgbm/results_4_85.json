@@ -1,0 +1,17 @@
+{
+  "dataset": "4_85",
+  "fold": 4,
+  "threshold": "85",
+  "model": "lightgbm",
+  "best_params": {
+    "number_trees": 202,
+    "max_tree_depth": 14,
+    "boosting_type": "dart",
+    "bagging_fraction": 0.5762544177325535,
+    "bagging_freq": 6,
+    "learning_rate": 0.5291225173353082,
+    "l1_norm": 0.0006069801260777633,
+    "l2_norm": 0.0005648246660542835
+  },
+  "best_optuna_loss": 7208.288970176594
+}
