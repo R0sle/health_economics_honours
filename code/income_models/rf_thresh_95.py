@@ -122,7 +122,7 @@ for fold in range(0, 5):
     val_label = validation_y[fold].copy()
 
     for thresh_idx, thresh in enumerate(['85', '95', '1']):
-        if thresh_idx == 2:
+        if thresh_idx != 1:
             continue
 
         train_input_data = train_x[fold].copy()
