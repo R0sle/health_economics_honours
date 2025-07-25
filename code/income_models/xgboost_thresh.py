@@ -7,6 +7,7 @@ import sys
 import joblib
 import pandas as pd
 import json
+import pickle
 
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
@@ -79,6 +80,10 @@ y_test = pd.read_csv(sys.argv[22])
 y_test = y_test.drop('Unnamed: 0', axis=1)
 
 output_dir = sys.argv[23]
+countries_dict_file = sys.argv[24]
+
+with open(countries_dict_file, 'rb') as f:
+    countries_dict = pickle.load(f)
 
 def objective(trial, x_train, y_train, x_val, y_val):
 
@@ -123,7 +128,7 @@ for fold in range(0, 5):
 
         #Create a study object and optimize the objective function.
         study = optuna.create_study(direction='minimize')
-        study.optimize(lambda trial: objective(trial, train_input_data, train_y[fold], val_input_data, validation_y[fold]), n_trials=300)
+        study.optimize(lambda trial: objective(trial, train_input_data, train_y[fold], val_relevant_input, validation_y[fold]), n_trials=300)
         best_model = xgb.XGBRegressor(**study.best_params, enable_categorical=True)
         best_model.fit(train_input_data, train_y[fold])
         
