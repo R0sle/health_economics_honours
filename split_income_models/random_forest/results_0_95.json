@@ -1,0 +1,14 @@
+{
+  "dataset": "0_95",
+  "fold": 0,
+  "threshold": "95",
+  "model": "xgboost",
+  "best_params": {
+    "n_estimators": 69,
+    "max_depth": 6,
+    "min_samples_split": 3,
+    "bootstrap": true,
+    "max_samples": 0.09306837197205195
+  },
+  "best_optuna_loss": 6028.066746860722
+}

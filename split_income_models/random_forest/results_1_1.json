@@ -2,13 +2,13 @@
   "dataset": "1_1",
   "fold": 1,
   "threshold": "1",
-  "model": "xgboost",
+  "model": "rf",
   "best_params": {
-    "n_estimators": 66,
-    "max_depth": 19,
-    "min_samples_split": 5,
+    "n_estimators": 57,
+    "max_depth": 24,
+    "min_samples_split": 10,
     "bootstrap": true,
-    "max_samples": 0.14947549764383067
+    "max_samples": 0.15026705506099675
   },
-  "best_optuna_loss": 2852.464077230935
+  "best_optuna_loss": 3151.525446884763
 }
