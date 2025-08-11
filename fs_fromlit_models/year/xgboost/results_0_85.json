@@ -1,0 +1,16 @@
+{
+  "dataset": "0_85",
+  "fold": 0,
+  "threshold": "85",
+  "model": "xgboost",
+  "best_params": {
+    "number_trees": 184,
+    "max_tree_depth": 15,
+    "boosting_type": "gbtree",
+    "subsample": 0.10059183796695949,
+    "learning_rate": 0.00023372937879739716,
+    "l1_norm": 0.00013717922690743953,
+    "l2_norm": 0.0006788311481471001
+  },
+  "best_optuna_loss": 18915.265625
+}

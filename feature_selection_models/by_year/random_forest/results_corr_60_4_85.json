@@ -1,0 +1,15 @@
+{
+  "dataset": "4_85",
+  "feature selection correlation": "corr_60",
+  "fold": 4,
+  "threshold": "85",
+  "model": "rf",
+  "best_params": {
+    "n_estimators": 74,
+    "max_depth": 24,
+    "min_samples_split": 3,
+    "bootstrap": true,
+    "max_samples": 0.9979360445176513
+  },
+  "best_optuna_loss": 5173.864434492023
+}

@@ -4,14 +4,14 @@
   "threshold": "1",
   "model": "lightgbm",
   "best_params": {
-    "number_trees": 132,
-    "max_tree_depth": 17,
+    "number_trees": 177,
+    "max_tree_depth": 14,
     "boosting_type": "dart",
-    "bagging_fraction": 0.863736623457597,
-    "bagging_freq": 1,
-    "learning_rate": 0.30898186846169984,
-    "l1_norm": 9.527474491753565e-06,
-    "l2_norm": 0.0004308282230345845
+    "bagging_fraction": 0.590971159033961,
+    "bagging_freq": 4,
+    "learning_rate": 0.13644960517027194,
+    "l1_norm": 0.00019196616793481117,
+    "l2_norm": 4.1172779401936143e-05
   },
-  "best_optuna_loss": 1811.5934983378218
+  "best_optuna_loss": 1771.0853165340684
 }

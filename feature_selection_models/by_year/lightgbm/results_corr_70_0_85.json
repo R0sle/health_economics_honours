@@ -1,0 +1,18 @@
+{
+  "dataset": "0_85",
+  "feature selection correlation": "corr_70",
+  "fold": 0,
+  "threshold": "85",
+  "model": "lightgbm",
+  "best_params": {
+    "number_trees": 191,
+    "max_tree_depth": 14,
+    "boosting_type": "dart",
+    "bagging_fraction": 0.44092897951662635,
+    "bagging_freq": 0,
+    "learning_rate": 0.1131744434968169,
+    "l1_norm": 0.00021044641221785375,
+    "l2_norm": 0.000250904931132836
+  },
+  "best_optuna_loss": 4875.571343239638
+}

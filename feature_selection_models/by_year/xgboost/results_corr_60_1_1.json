@@ -1,0 +1,17 @@
+{
+  "dataset": "1_1",
+  "feature selection correlation": "corr_60",
+  "fold": 1,
+  "threshold": "1",
+  "model": "xgboost",
+  "best_params": {
+    "number_trees": 54,
+    "max_tree_depth": 18,
+    "boosting_type": "gbtree",
+    "subsample": 0.715993544924437,
+    "learning_rate": 0.12557601998001428,
+    "l1_norm": 5.569909280458739e-05,
+    "l2_norm": 5.234697313209844e-05
+  },
+  "best_optuna_loss": 3914.833740234375
+}
