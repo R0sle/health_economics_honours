@@ -1,0 +1,18 @@
+{
+  "features": "corr_70",
+  "fold": "0",
+  "threshold": "95",
+  "sensitivity": "pre",
+  "model": "lightgbm",
+  "best_params": {
+    "number_trees": 73,
+    "max_tree_depth": 10,
+    "boosting_type": "dart",
+    "bagging_fraction": 0.3673867430387967,
+    "bagging_freq": 0,
+    "learning_rate": 0.37319768344084403,
+    "l1_norm": 0.0005798386259748402,
+    "l2_norm": 0.0007611937698443953
+  },
+  "best_optuna_loss": 1901.3164967293774
+}

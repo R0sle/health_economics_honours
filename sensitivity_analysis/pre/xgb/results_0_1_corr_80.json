@@ -1,0 +1,17 @@
+{
+  "features": "corr_80",
+  "fold": "0",
+  "threshold": "1",
+  "sensitivity": "pre",
+  "model": "xgboost",
+  "best_params": {
+    "n_estimators": 163,
+    "max_depth": 7,
+    "booster": "gbtree",
+    "subsample": 0.2637832853752835,
+    "learning_rate": 0.8231669117576397,
+    "reg_alpha": 0.000892409913232935,
+    "reg_lambda": 0.0005525287768059314
+  },
+  "best_optuna_loss": 5621.341796875
+}

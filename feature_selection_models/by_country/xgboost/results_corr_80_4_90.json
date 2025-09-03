@@ -1,0 +1,17 @@
+{
+  "dataset": "4_90",
+  "feature selection correlation": "corr_80",
+  "fold": 4,
+  "threshold": "90",
+  "model": "xgboost",
+  "best_params": {
+    "n_estimators": 53,
+    "max_depth": 25,
+    "booster": "gbtree",
+    "subsample": 0.12461083411219016,
+    "learning_rate": 0.10553344844369701,
+    "reg_alpha": 7.108831114817406e-05,
+    "reg_lambda": 5.5983725790669734e-05
+  },
+  "best_optuna_loss": 21488.548828125
+}

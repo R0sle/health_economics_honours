@@ -72,14 +72,8 @@ y_val_3 = y_val_3.drop('Unnamed: 0', axis=1)
 y_val_4 = pd.read_csv(sys.argv[20])
 y_val_4 = y_val_4.drop('Unnamed: 0', axis=1)
 
-X_test = pd.read_csv(sys.argv[21])
-X_test = X_test.drop('Unnamed: 0', axis=1)
-
-y_test = pd.read_csv(sys.argv[22])
-y_test = y_test.drop('Unnamed: 0', axis=1)
-
-output_dir = sys.argv[23]
-countries_dict = sys.argv[24]
+output_dir = sys.argv[21]
+thresh = sys.argv[22]
 
 def objective(trial, x_train, y_train, x_val, y_val):
 
@@ -102,9 +96,6 @@ def objective(trial, x_train, y_train, x_val, y_val):
 
     return val_loss  # Optuna minimizes this
 
-X_testing = X_test.copy()
-X_testing['setting'] = X_testing['setting'].map(countries_dict)
-
 validation = [X_val_0, X_val_1, X_val_2, X_val_3, X_val_4]
 validation_y = [y_val_0, y_val_1, y_val_2, y_val_3, y_val_4]
 
@@ -113,37 +104,31 @@ train_y = [y_train_0, y_train_1, y_train_2, y_train_3, y_train_4]
 
 for fold in range(0, 5):
     val_input_data = validation[fold].copy()
-    val_input_data['setting'] = val_input_data['setting'].map(countries_dict)
-    val_label = validation_y[fold] 
+    val_label = validation_y[fold].copy()
 
-    for thresh_idx, thresh in enumerate(['85', '95', '1']):
-        if thresh_idx != 2:
-            continue
-        train_input_data = train_x[fold].copy()
-        train_input_data['setting'] = train_input_data['setting'].map(countries_dict)
-        train_label = train_y[fold]
+    train_input_data = train_x[fold].copy()
+    train_label = train_y[fold].copy()
 
-        #Create a study object and optimize the objective function.
-        study = optuna.create_study(direction='minimize')
-        study.optimize(lambda trial: objective(trial, train_input_data, train_label, val_input_data, val_label), n_trials=300)
-        best_model = RandomForestRegressor(**study.best_params)
-        best_model.fit(train_input_data, train_label)
-        
-        #save best model 
-        joblib.dump(best_model, output_dir + '/best_model_' + str(fold) + '_' + thresh +  '.pkl')
-        joblib.dump(study.best_params, f"{output_dir}/best_params_{fold}_{thresh}.pkl")
+    val_relevant_input = val_input_data[train_input_data.columns]
 
-        # Save study for later visualization
-        joblib.dump(study, f"{output_dir}/optuna_study_{fold}_{thresh}.pkl")
+    #Create a study object and optimize the objective function.
+    study = optuna.create_study(direction='minimize')
+    study.optimize(lambda trial: objective(trial, train_input_data, train_label, val_relevant_input, val_label), n_trials=1000)
+    
+    #save best model 
+    joblib.dump(study.best_params, f"{output_dir}/best_params_{fold}_{thresh}.pkl")
 
-        summary = {
-            "dataset": str(fold) + '_' + thresh,
-            "fold" : fold,
-            "threshold": thresh,
-            "model": 'rf',
-            "best_params": study.best_params,
-            "best_optuna_loss": study.best_value
-        }
+    # Save study for later visualization
+    joblib.dump(study, f"{output_dir}/optuna_study_{fold}_{thresh}.pkl")
 
-        with open(f"{output_dir}/results_{fold}_{thresh}.json", "w") as f:
-            json.dump(summary, f, indent=2)
+    summary = {
+        "dataset": str(fold) + '_' + thresh,
+        "fold" : fold,
+        "threshold": thresh,
+        "model": 'rf',
+        "best_params": study.best_params,
+        "best_optuna_loss": study.best_value
+    }
+
+    with open(f"{output_dir}/results_{fold}_{thresh}.json", "w") as f:
+        json.dump(summary, f, indent=2)

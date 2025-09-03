@@ -1,0 +1,14 @@
+{
+  "dataset": "4_90",
+  "fold": 4,
+  "threshold": "90",
+  "model": "rf",
+  "best_params": {
+    "n_estimators": 10,
+    "max_depth": 23,
+    "min_samples_split": 4,
+    "bootstrap": true,
+    "max_samples": 0.6091932322323829
+  },
+  "best_optuna_loss": 3085.5749602741066
+}

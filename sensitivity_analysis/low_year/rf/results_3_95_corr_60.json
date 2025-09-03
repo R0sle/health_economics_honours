@@ -1,0 +1,14 @@
+{
+  "features": "corr_60",
+  "fold": "3",
+  "threshold": "95",
+  "sensitivity": "low",
+  "model": "rf",
+  "best_params": {
+    "n_estimators": 36,
+    "max_depth": 3,
+    "min_samples_split": 10,
+    "bootstrap": false
+  },
+  "best_optuna_loss": 9142.92671678252
+}

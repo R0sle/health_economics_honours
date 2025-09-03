@@ -1,0 +1,91 @@
+import xgboost as xgb 
+import optuna.visualization as vis
+
+import numpy as np
+import optuna
+import sys
+import joblib
+import pandas as pd
+import json
+import joblib
+
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import r2_score
+
+features = sys.argv[1]
+sensitivity = sys.argv[2]
+thresh = sys.argv[3]
+fold = sys.argv[4]
+train_data_file = 'sensitivity_analysis/country_data/' + sensitivity + '_inc.pkl'
+with open(train_data_file, 'rb') as f:
+    train_data = joblib.load(f)
+
+if thresh == '85':
+    thresh_idx = 0
+elif thresh == '90':
+    thresh_idx = 2
+elif thresh == '95':
+    thresh_idx = 4
+elif thresh == '1':
+    thresh_idx = 6
+
+train_x = train_data[int(fold)][features][thresh_idx]
+train_x = train_x.drop(columns=['index'], axis=1)
+train_y = train_data[int(fold)][features][thresh_idx + 1]
+
+val_data_file = 'sensitivity_analysis/country_data/val_' + sensitivity + '_inc.pkl'
+with open(val_data_file, 'rb') as vf:
+    val_data = joblib.load(vf)
+
+val_x = val_data[int(fold)][0]
+val_y = val_data[int(fold)][1]
+
+def objective(trial, x_train, y_train, x_val, y_val):
+
+    n_trees = trial.suggest_int("n_estimators", 10, 300)
+
+    max_depth = trial.suggest_int("max_depth", 3, 25)
+
+    boosting_type = trial.suggest_categorical("booster", ['gbtree', 'dart'])
+    subsample = trial.suggest_float("subsample", 0.1, 1)
+
+    learning_rate = trial.suggest_float("learning_rate", 0, 1)
+    l1_norm = trial.suggest_float("reg_alpha", 0, 0.001)
+    l2_norm = trial.suggest_float("reg_lambda", 0, 0.001)
+
+    xgb_model = xgb.XGBRegressor(missing=np.nan, random_state=42, n_estimators=n_trees, booster=boosting_type, max_depth=max_depth, learning_rate=learning_rate, reg_alpha=l1_norm, reg_lambda=l2_norm, sampling_method="uniform", subsample=subsample)
+    trained_model = xgb_model.fit(x_train, y_train)
+    y_pred = trained_model.predict(x_val)
+    val_loss = mean_squared_error(y_pred, y_val)
+
+    return val_loss  # Optuna minimizes this
+
+
+val_input_data = val_x.copy()
+train_input_data = train_x.copy()
+
+val_relevant_input = val_input_data[train_input_data.columns]
+
+#Create a study object and optimize the objective function.
+study = optuna.create_study(direction='minimize')
+study.optimize(lambda trial: objective(trial, train_input_data, train_y.copy(), val_relevant_input, val_y.copy()), n_trials=1000)
+
+#save best model 
+joblib.dump(study.best_params, f"sensitivity_analysis/{sensitivity}/xgb/best_params_{fold}_{thresh}_{features}.pkl")
+
+# Save study for later visualization
+joblib.dump(study, f"sensitivity_analysis/{sensitivity}/xgb/optuna_study_{fold}_{thresh}_{features}.pkl")
+
+summary = {
+    "features": features,
+    "fold" : fold,
+    "threshold": thresh,
+    "sensitivity": sensitivity,
+    "model": 'xgboost',
+    "best_params": study.best_params,
+    "best_optuna_loss": study.best_value
+}
+
+with open(f"sensitivity_analysis/{sensitivity}/xgb/results_{fold}_{thresh}_{features}.json", "w") as f:
+    json.dump(summary, f, indent=2)

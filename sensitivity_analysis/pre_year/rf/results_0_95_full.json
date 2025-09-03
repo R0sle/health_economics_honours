@@ -1,0 +1,15 @@
+{
+  "features": "full",
+  "fold": "0",
+  "threshold": "95",
+  "sensitivity": "pre",
+  "model": "rf",
+  "best_params": {
+    "n_estimators": 170,
+    "max_depth": 13,
+    "min_samples_split": 2,
+    "bootstrap": true,
+    "max_samples": 0.10826943226800416
+  },
+  "best_optuna_loss": 831.4973437115997
+}

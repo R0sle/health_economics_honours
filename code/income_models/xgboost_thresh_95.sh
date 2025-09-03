@@ -13,6 +13,6 @@
 module load python3
 source /scratch/dx61/rr4398/mmr/modenv/bin/activate
 
-python3 inc_code/xgboost_thresh_95.py inc_data/train/X_train_0_95.csv inc_data/train/X_train_1_95.csv inc_data/train/X_train_2_95.csv inc_data/train/X_train_3_95.csv inc_data/train/X_train_4_95.csv inc_data/train/y_train_0_95.csv inc_data/train/y_train_1_95.csv inc_data/train/y_train_2_95.csv inc_data/train/y_train_3_95.csv inc_data/train/y_train_4_95.csv inc_data/val/X_val_0.csv inc_data/val/X_val_1.csv inc_data/val/X_val_2.csv inc_data/val/X_val_3.csv inc_data/val/X_val_4.csv inc_data/val/y_val_0.csv inc_data/val/y_val_1.csv inc_data/val/y_val_2.csv inc_data/val/y_val_3.csv inc_data/val/y_val_4.csv inc_data/test/X_test.csv inc_data/test/y_test.csv inc_models/xgboost/ inc_data/countries_dict.pkl
+python3 inc_code/xgboost_script.py inc_data/train/X_train_0_95.csv inc_data/train/X_train_1_95.csv inc_data/train/X_train_2_95.csv inc_data/train/X_train_3_95.csv inc_data/train/X_train_4_95.csv inc_data/train/y_train_0_95.csv inc_data/train/y_train_1_95.csv inc_data/train/y_train_2_95.csv inc_data/train/y_train_3_95.csv inc_data/train/y_train_4_95.csv inc_data/val/X_val_0.csv inc_data/val/X_val_1.csv inc_data/val/X_val_2.csv inc_data/val/X_val_3.csv inc_data/val/X_val_4.csv inc_data/val/y_val_0.csv inc_data/val/y_val_1.csv inc_data/val/y_val_2.csv inc_data/val/y_val_3.csv inc_data/val/y_val_4.csv inc_models/xgboost/ 95
 
 deactivate

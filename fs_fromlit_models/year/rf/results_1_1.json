@@ -4,11 +4,11 @@
   "threshold": "1",
   "model": "rf",
   "best_params": {
-    "n_estimators": 58,
-    "max_depth": 14,
-    "min_samples_split": 6,
+    "n_estimators": 19,
+    "max_depth": 25,
+    "min_samples_split": 3,
     "bootstrap": true,
-    "max_samples": 0.33824679532095314
+    "max_samples": 0.8603078952095138
   },
-  "best_optuna_loss": 3054.9660189921947
+  "best_optuna_loss": 2618.4765438640297
 }

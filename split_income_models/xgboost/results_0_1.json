@@ -4,13 +4,13 @@
   "threshold": "1",
   "model": "xgboost",
   "best_params": {
-    "number_trees": 18,
-    "max_tree_depth": 22,
-    "boosting_type": "dart",
-    "subsample": 0.9297866246159079,
-    "learning_rate": 1.3533267390993821e-05,
-    "l1_norm": 0.0002020771893712698,
-    "l2_norm": 0.0008378964483729736
+    "n_estimators": 104,
+    "max_depth": 4,
+    "booster": "gbtree",
+    "subsample": 0.957164496697142,
+    "learning_rate": 0.018848892197520103,
+    "reg_alpha": 0.0005112217978026153,
+    "reg_lambda": 1.4145171826697979e-05
   },
-  "best_optuna_loss": 26724.798828125
+  "best_optuna_loss": 2934.950439453125
 }
