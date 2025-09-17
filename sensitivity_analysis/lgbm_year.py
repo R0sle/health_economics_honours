@@ -17,7 +17,7 @@ features = sys.argv[1]
 sensitivity = sys.argv[2]
 thresh = sys.argv[3]
 fold = sys.argv[4]
-train_data_file = 'sensitivity_analysis/year_data/' + sensitivity + '_year.pkl'
+train_data_file = 'year_data/' + sensitivity + '_year.pkl'
 with open(train_data_file, 'rb') as f:
     train_data = joblib.load(f)
 
@@ -34,7 +34,7 @@ train_x = train_data[int(fold)][features][thresh_idx]
 train_x = train_x.drop(columns=['index'], axis=1)
 train_y = train_data[int(fold)][features][thresh_idx + 1]
 
-val_data_file = 'sensitivity_analysis/year_data/val_' + sensitivity + '_year.pkl'
+val_data_file = 'year_data/val_' + sensitivity + '_year.pkl'
 with open(val_data_file, 'rb') as vf:
     val_data = joblib.load(vf)
 
@@ -81,10 +81,10 @@ study = optuna.create_study(direction='minimize')
 study.optimize(lambda trial: objective(trial, train_input_data, train_label, val_relevant_input, val_label), n_trials=1000)
 
 #save best model 
-joblib.dump(study.best_params, f"sensitivity_analysis/{sensitivity}_year/lgb/best_params_{fold}_{thresh}_{features}.pkl")
+joblib.dump(study.best_params, f"{sensitivity}_year/lgb/best_params_{fold}_{thresh}_{features}.pkl")
 
 # Save study for later visualization
-joblib.dump(study, f"sensitivity_analysis/{sensitivity}_year/lgb/optuna_study_{fold}_{thresh}_{features}.pkl")
+joblib.dump(study, f"{sensitivity}_year/lgb/optuna_study_{fold}_{thresh}_{features}.pkl")
 
 summary = {
     "features": features,
@@ -96,5 +96,5 @@ summary = {
     "best_optuna_loss": study.best_value
 }
 
-with open(f"sensitivity_analysis/{sensitivity}_year/lgb/results_{fold}_{thresh}_{features}.json", "w") as f:
+with open(f"{sensitivity}_year/lgb/results_{fold}_{thresh}_{features}.json", "w") as f:
     json.dump(summary, f, indent=2)
