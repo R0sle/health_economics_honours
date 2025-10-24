@@ -17,7 +17,7 @@ The main contributions of my research were that:
 
 ## Project Monitoring:
 - The weekly_reports folder contains all reports presented to my supervisors during our weekly meetings. They contain progress updates and document my research process.
-- The Presentations folder the Powerpoint presented at the Australian Health Economics Society's Annual Conference in October and the Powerpoint presented in May to my supervisor's lab group as a wid-point progress update.
+- The Presentations folder the Powerpoint presented at the Australian Health Economics Society's Annual Conference in September and the Powerpoint presented in May to my supervisor's lab group as a wid-point progress update.
 
 ## Thesis:
 - The Report folder contains the various drafts of my thesis, both with and without supervisor feedback.
